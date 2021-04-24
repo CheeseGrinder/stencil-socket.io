@@ -19,7 +19,7 @@
 
 ## Install
 ```bash
-npm i socket.io-client
+npm i stencil-socket.io
 ```
 
 ## How to use
