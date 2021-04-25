@@ -14,29 +14,29 @@
   
 </div>
 
-## Description
+## Description 📄
 <p>Stencil-socket.io is a helper for using <a href="https://socket.io/">socket.io</a> with Stencil</p>
 
-## Install
+## Install 📦️
 ```bash
 npm i stencil-socket.io
 ```
 
-## How to use
+## How to use ✏️
 
-In the shared directory create a file with the code :
+In the shared directory, create a file with the following code :
 ```ts
 // socket.ts
-import { StencilIo } from 'stencil-socket.io';
+import { StencilSocket } from 'stencil-socket.io';
 
-export const socket = StencilIo('foo.bar');
+export const socket = StencilSocket('foo.bar');
 ```
 
 In component:
 ```tsx
 import { Component, h, State } from '@stencil/core';
-import { socket } from 'shared/socket';
 import { Emmiter } from 'stencil-socket.io';
+import { socket } from 'shared/socket';
 
 @Component({
   tag: 'some-component'

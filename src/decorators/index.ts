@@ -1,1 +1,3 @@
-export * from './Socket.decorator';
+export * from './Emit.decorator';
+export * from './Receive.decorator';
+export * from './Instance.decorator';
