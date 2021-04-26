@@ -33,9 +33,11 @@ export const socket = StencilSocket('foo.bar');
 ```
 
 In component:
+
 ```tsx
 import { Component, h, State } from '@stencil/core';
-import { Emmiter } from 'stencil-socket.io';
+import { Socket } from 'socket.io-client';
+import { IoEmmiter } from 'stencil-socket.io';
 import { socket } from 'shared/socket';
 
 @Component({
@@ -43,15 +45,32 @@ import { socket } from 'shared/socket';
 })
 export class SomeComponent {
 
+  private socketIsConnected: boolean = false;
+
   @State() data: number = 0;
 
-  @socket.Emit('socket:event') emmiter: Emmiter<number>;
+  @socket.Instance() socket: Socket;
+
+  @socket.Emit('socket:event') emmiter: IoEmmiter<number>;
 
   @socket.Receive('socket:event') onReceive(data: number): void {
     this.data = data;
   }
 
-  private emit() {
+  @socket.Connect() onConnect(): void {
+    this.socketIsConnected = true;
+  }
+
+  @socket.Disonnect() ondisconnect(): void {
+    this.socketIsConnected = false;
+  }
+
+  /** alternative to @Connect and @Disconnect */
+  @socket.Status() onSocketstatusChange(connected: boolean): void {
+    this.socketIsConnected = connected;
+  }
+
+  private emit(): void {
     this.emmiter.emit(this.data);
   }
 
