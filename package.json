@@ -1,6 +1,6 @@
 {
   "name": "stencil-socket.io",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Helper to use socket.io on StencilJS",
   "main": "dist/index.js",
   "scripts": {

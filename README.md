@@ -21,7 +21,6 @@
 ```bash
 npm i stencil-socket.io
 ```
-
 ## How to use ✏️
 
 In the shared directory, create a file with the following code :
@@ -32,8 +31,7 @@ import { StencilSocket } from 'stencil-socket.io';
 export const socket = StencilSocket('foo.bar');
 ```
 
-In component:
-
+In a component or class:
 ```tsx
 import { Component, h, State } from '@stencil/core';
 import { Socket } from 'socket.io-client';

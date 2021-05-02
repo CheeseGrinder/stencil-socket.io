@@ -1,15 +1,22 @@
 import { ComponentInstance } from '@stencil/router/dist/types/stencil.core';
 import { Socket } from 'socket.io-client';
+import { bind } from '../functions/bind';
 
 
 export const Connect = (socket: Socket) => (): MethodDecorator => {
   return (proto: ComponentInstance, methodName: string | symbol) => {
-    const { connectedCallback } = proto;
+    const { connectedCallback, render } = proto;
 
-    proto.connectedCallback = function() {
-      const method = this[methodName as string] as () => any;
-      socket.on('connect', method.bind(this));
-      return connectedCallback && connectedCallback.call(this);
+    if (render) {
+      proto.connectedCallback = function() {
+        const method: VoidFunction = this[methodName as string];
+        bind(socket, 'connect', method, this);
+        return connectedCallback?.call(this);
+      }
+    } else {
+      const method: VoidFunction = proto[methodName as string];
+      bind(socket, 'connect', method, proto);
     }
   }
 }
+
